@@ -20,4 +20,17 @@ public with sharing class BatchRetrieveGamesTest {
         System.assertNotEquals(games.size(), null);
 
     }
+    
+    @isTest
+   private static void testSchedulable(){
+        Test.startTest();
+        StaticResourceCalloutMock mock = new StaticResourceCalloutMock();
+        mock.setStaticResource('gamesResponse');
+        mock.setStatusCode(200);
+        Test.setMock(HttpCalloutMock.class, mock);
+        BatchRetrieveGames batch = new BatchRetrieveGames();   
+        String chron = '0 0 23 * * ?';        
+        System.schedule('Test Sched', chron, batch);
+        Test.stopTest();
+    }
 }

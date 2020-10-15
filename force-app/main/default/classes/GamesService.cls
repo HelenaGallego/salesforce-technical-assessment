@@ -3,14 +3,14 @@ public with sharing class GamesService {
     public GamesService() {
 
     }
-    public static Integer getTotalGames(){
+    public static Integer getTotalPages(){
         HttpResponse response = new Balldontlie().request(
                 Balldontlie.REST_METHOD_GET, 
                 Balldontlie.GAMES_API_PATH
         );
         if (response.getStatusCode() == Balldontlie.RESPONSE_CODE_SUCCESS) {
             GamesWrapper games = (GamesWrapper) JSON.deserialize(response.getBody(), GamesWrapper.class);
-            return (Integer) games.meta.total_count;
+            return (Integer) games.meta.total_pages;
         } else {
             throw new BalldontlieException(response.getBody());
         }
