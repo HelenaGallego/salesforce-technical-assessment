@@ -22,7 +22,7 @@ public with sharing class GamesService {
                 Balldontlie.GAMES_API_PATH + '?page='+currrentPage + 'per_page'+perPage
         );
         if (response.getStatusCode() == Balldontlie.RESPONSE_CODE_SUCCESS) {
-            return (GamesWrapper) JSON.deserialize(response.getBody(), GamesWrapper.class);
+            return (GamesWrapper) JSON.deserialize(response.getBody().replace('date','gamedate'), GamesWrapper.class);
         } else {
             throw new BalldontlieException(response.getBody());
         }
@@ -39,7 +39,6 @@ public with sharing class GamesService {
     public static Game__c convertGameEntityToGame(GameEntity game){
         Game__c gameObject = new Game__c(
             ExternalID__c = game.id,
-            //GameDate__c = game.gamedate,
             HomeTeamScore__c = game.home_team_score,
             Period__c = game.period,
             PostSeason__c = game.postseason,
@@ -47,6 +46,7 @@ public with sharing class GamesService {
             Status__c = game.status,
             VisitorTeamScore__c = game.visitor_team_score
         );
+        gameObject.gameDate__c = game.gamedate!=null ? (DateTime)Json.deserialize(game.gamedate, DateTime.class) : null;
         Team__c hometeam = new Team__c(External_Id__c = game.home_team.id);
         Team__c visitorteam = new Team__c(External_Id__c = game.visitor_team.id);
         gameObject.HomeTeam__r = hometeam;
