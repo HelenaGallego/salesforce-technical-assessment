@@ -21,7 +21,6 @@ global with sharing class ScheduleRetrieveGames implements  Database.AllowsCallo
     }
 
     global void execute(System.SchedulableContext SC) {
-        
         if(currentPage <= totalPages){
             List<Game__c> gamesToInsert = new List<Game__c>();
             Integer i = currentPage;
@@ -32,12 +31,10 @@ global with sharing class ScheduleRetrieveGames implements  Database.AllowsCallo
                 gamesToInsert.addAll(GamesService.convertGamesWrapperToGames(wrapper));
                 i = i + 1;
             }
-
             Database.upsert(gamesToInsert, false);
             authSettings.currentPage__c = lastPage;
             update authSettings;
         }
-        
     }
 
 }

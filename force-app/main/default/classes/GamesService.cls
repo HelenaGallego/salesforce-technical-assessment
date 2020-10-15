@@ -53,4 +53,30 @@ public with sharing class GamesService {
         gameObject.VisitorTeam__r = visitorteam;
         return gameObject;
     }
+
+    public static Map<Id, Integer> getCountAllPlayedGames(Set<Id> teamsId){
+        Map<Id, Integer> allPlayedGames = new Map<Id, Integer>();
+        for(Team__c team: [select id, (Select id from Games__r), (select id from Games1__r) from team__c where Id in: teamsId]){
+            allPlayedGames.put(team.id, team.Games__r.size() + team.Games__r.size());
+        }
+        return allPlayedGames;
+    }
+
+    public static List<AggregateResult> getCountAllWonGames(Set<Id> teamsId){
+        List<AggregateResult> allWons = [
+            SELECT 
+                COUNT(id), 
+                winnerteam__c
+            FROM 
+                Game__c 
+            WHERE 
+                WinnerTeam__c 
+            IN: 
+                teamsId
+            GROUP BY 
+                winnerteam__c 
+        ];
+        return allWons;
+    }
+    
 }
