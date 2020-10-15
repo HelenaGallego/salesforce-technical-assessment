@@ -6,22 +6,22 @@ The solution contains:
 - Apex classes
 
 
-The Game__c object contains the following fields:
+The Game__c object contains the following custom fields:
 
-CreatedById	Lookup(User)
-ExternalID__c	Number(18, 0) (External ID) (Unique)
-Name	Text(80)
-GameDate__c	Date/Time
-HomeTeam__c	Lookup(Team)
-HomeTeamScore__c	Number(18, 0)
-LastModifiedById	Lookup(User)
-OwnerId	Lookup(User,Group)
-Period__c	Number(18, 0)
-PostSeason__c	Checkbox
-Season__c	Number(18, 0)
-Status__c	Text(50)
-VisitorTeam__c	Lookup(Team)
-VisitorTeamScore__c	Number(18, 0)
+
+Field  | Type
+------------- | -------------
+ExternalID__c  | Number(18, 0) (External ID) (Unique)
+GameDate__c  | Date/Time
+HomeTeam__c | Lookup(Team)
+HomeTeamScore__c | Number(18, 0)
+Period__c | Number(18, 0)
+PostSeason__c | Checkbox
+Season__c | Number(18, 0)
+Status__c | Text(50)
+VisitorTeam__c |	Lookup(Team)
+VisitorTeamScore__c	| Number(18, 0)
+
 
 The BalldontlieSettings__c custom setting is a list custom setting to add the configuration data for the Balldontlie such as the URL and the current number of pages already processed.
 
