@@ -1,4 +1,4 @@
-Solution proposed for CTL technical assignment:
+Solution proposed for the technical assignment:
 
 The solution contains:
 - The Game__c object

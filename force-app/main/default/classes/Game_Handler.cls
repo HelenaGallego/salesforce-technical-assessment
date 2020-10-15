@@ -48,7 +48,6 @@ public without sharing class Game_Handler {
             teams.add(game.hometeam__c);
             teams.add(game.visitorteam__c);
         }
-
         List<AggregateResult> allWon = GamesService.getCountAllWonGames(teams);
         Map<Id,Integer> mapAllWon = Util.listToMap(allWon);
         Map<Id,Integer> mapAllPlayed = GamesService.getCountAllPlayedGames(teams);
