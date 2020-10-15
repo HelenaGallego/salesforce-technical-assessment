@@ -54,10 +54,12 @@ public without sharing class Game_Handler {
 
         List<Team__c> teamsToUpdate = new List<Team__c>();
         for(Id team: teams){
-            Decimal average = (Decimal) (mapAllWon.get(team) / (Decimal) mapAllPlayed.get(team)) * 100;
-            teamsToUpdate.add(new Team__c(Id = team, AverageWon__c = average));
+            if(mapAllWon.get(team) != null && mapAllPlayed.get(team) != null && mapAllPlayed.get(team) > 0){
+                Decimal average = (Decimal) (mapAllWon.get(team) / (Decimal) mapAllPlayed.get(team)) * 100;
+                teamsToUpdate.add(new Team__c(Id = team, AverageWon__c = average));
+            }
         }
-        update teamsToUpdate;
+        if(!teamsToUpdate.isEmpty()) update teamsToUpdate;
     }
 
 

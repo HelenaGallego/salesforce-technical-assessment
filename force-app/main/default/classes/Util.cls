@@ -11,5 +11,11 @@ public with sharing class Util {
         }
         return results;
     }
+
+    public static Integer getRandomInt(Integer min, Integer max) {
+        return (Integer) Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+
 }
 
